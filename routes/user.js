@@ -34,9 +34,17 @@ router.post("/login", passport.authenticate("local", {
    let {username, password} = req.body;
    req.flash("success", "Welcome Back!");
    res.redirect("/listings");
+}));
 
-
-}))
+router.get("/logout", (req, res, next) => {
+     req.logout((err) => {
+        if (err) {
+          return next(err);
+        }
+        req.flash("success", "you are logged out!");
+        res.redirect("/listings");
+     })
+})
 
 
 
